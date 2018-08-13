@@ -1,4 +1,5 @@
 import { EditorState, Transaction } from 'prosemirror-state';
+import Paper from 'material-ui/Paper';
 import React from 'react';
 import MenuButton from './MenuButton';
 import menu from './config/menu';
@@ -20,7 +21,7 @@ const styles = {
 };
 
 const MenuBar: React.SFC<Props> = ({ children, state, dispatch }) => (
-  <div style={styles.bar}>
+  <Paper style={styles.bar}>
     {children && (
       <span style={styles.group}>
         {children}
@@ -34,7 +35,7 @@ const MenuBar: React.SFC<Props> = ({ children, state, dispatch }) => (
         ))}
       </span>
     ))}
-  </div>
+  </Paper>
 );
 
 export default MenuBar;

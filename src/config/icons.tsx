@@ -1,51 +1,28 @@
+import Redo from 'material-ui/svg-icons/content/redo';
+import Undo from 'material-ui/svg-icons/content/undo';
+import Bold from 'material-ui/svg-icons/editor/format-bold';
+import Italic from 'material-ui/svg-icons/editor/format-italic';
+import BulletedList from 'material-ui/svg-icons/editor/format-list-bulleted';
+import OrderedList from 'material-ui/svg-icons/editor/format-list-numbered';
+import Quote from 'material-ui/svg-icons/editor/format-quote';
+import Underlined from 'material-ui/svg-icons/editor/format-underlined';
+import Link from 'material-ui/svg-icons/editor/insert-link';
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faAsterisk,
-  faBold,
-  faItalic,
-  faCode,
-  faSuperscript,
-  faSubscript,
-  faUnderline,
-  faStrikethrough,
-  faLink,
-  faParagraph,
-  faHeading,
-  faQuoteLeft,
-  faListOl,
-  faListUl,
-  faImage,
-  faTable,
-  faUndo,
-  faRedo,
-  faOutdent,
-  faAngleUp,
-} from '@fortawesome/free-solid-svg-icons';
-import { markdownIcon } from './markdown-icon';
+import Heading1Icon from './Heading1Icon';
+import Heading2Icon from './Heading2Icon';
+import ParagraphIcon from './ParagraphIcon';
 
 export default {
-  em: <FontAwesomeIcon icon={faItalic} />,
-  italic: <FontAwesomeIcon icon={markdownIcon} />,
-  strong: <FontAwesomeIcon icon={faBold} />,
-  bold: <FontAwesomeIcon icon={faBold} />,
-  code: <FontAwesomeIcon icon={faCode} />,
-  subscript: <FontAwesomeIcon icon={faSubscript} />,
-  superscript: <FontAwesomeIcon icon={faSuperscript} />,
-  underline: <FontAwesomeIcon icon={faUnderline} />,
-  strikethrough: <FontAwesomeIcon icon={faStrikethrough} />,
-  link: <FontAwesomeIcon icon={faLink} />,
-  paragraph: <FontAwesomeIcon icon={faParagraph} />,
-  heading: <FontAwesomeIcon icon={faHeading} />,
-  blockquote: <FontAwesomeIcon icon={faQuoteLeft} />,
-  code_block: <FontAwesomeIcon icon={faCode} />,
-  ordered_list: <FontAwesomeIcon icon={faListOl} />,
-  bullet_list: <FontAwesomeIcon icon={faListUl} />,
-  image: <FontAwesomeIcon icon={faImage} />,
-  table: <FontAwesomeIcon icon={faTable} />,
-  footnote: <FontAwesomeIcon icon={faAsterisk} />,
-  undo: <FontAwesomeIcon icon={faUndo} />,
-  redo: <FontAwesomeIcon icon={faRedo} />,
-  lift: <FontAwesomeIcon icon={faOutdent} />,
-  join_up: <FontAwesomeIcon icon={faAngleUp} />,
+  italic: <Italic />,
+  bold: <Bold />,
+  underline: <Underlined />,
+  link: <Link />,
+  paragraph: <ParagraphIcon />,
+  heading1: <Heading1Icon />,
+  heading2: <Heading2Icon />,
+  blockquote: <Quote />,
+  ordered_list: <OrderedList />,
+  bullet_list: <BulletedList />,
+  undo: <Undo />,
+  redo: <Redo />,
 };

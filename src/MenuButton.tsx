@@ -1,19 +1,7 @@
 import { EditorState, Transaction } from 'prosemirror-state';
 import React, { MouseEvent } from 'react';
 import { MenuItem } from './config/menu';
-
-const style = {
-  background: '#fff',
-  border: 'none',
-  fontSize: 'inherit',
-  cursor: 'pointer',
-  color: '#777',
-  borderRadius: 0,
-  paddingTop: 5,
-  paddingBottom: 5,
-  paddingLeft: 10,
-  paddingRight: 10,
-};
+import IconButton from 'material-ui/IconButton';
 
 interface Props {
   state: EditorState;
@@ -31,15 +19,14 @@ class MenuButton extends React.PureComponent<Props> {
   render() {
     const { state, dispatch, item } = this.props;
     return (
-      <button
-        type="button"
-        style={style}
+      <IconButton
         title={item.title}
+        tooltip={item.title}
         disabled={item.enable && !item.enable(state, dispatch)}
         onClick={this.onClick}
       >
         {item.content}
-      </button>
+      </IconButton>
     );
   }
 

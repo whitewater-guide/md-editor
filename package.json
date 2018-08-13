@@ -10,9 +10,6 @@
     "storybook": "STORYBOOK_ENABLED=true start-storybook -p 6006 -c .storybook"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.2",
-    "@fortawesome/free-solid-svg-icons": "^5.2.0",
-    "@fortawesome/react-fontawesome": "^0.1.1",
     "prosemirror-commands": "latest",
     "prosemirror-history": "latest",
     "prosemirror-markdown": "^1.1.1",
@@ -28,6 +25,7 @@
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.10",
     "@storybook/react": "4.0.0-alpha.16",
+    "@types/material-ui": "^0.21.5",
     "@types/prosemirror-commands": "^1.0.1",
     "@types/prosemirror-history": "^1.0.1",
     "@types/prosemirror-markdown": "^1.0.1",
@@ -39,12 +37,14 @@
     "@types/react-dom": "^16.0.7",
     "@types/storybook__react": "^3.0.9",
     "awesome-typescript-loader": "^5.2.0",
+    "material-ui": "0.20.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "tslint-eslint-rules": "^5.3.1",
     "tslint-react": "^3.6.0"
   },
   "peerDependencies": {
+    "material-ui": "0.20.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"
   }

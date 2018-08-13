@@ -50,8 +50,8 @@ export type MenuConfig = { [key: string]: MenuGroup };
 const menuConfig: MenuConfig = {
   marks: {
     strong: {
-      title: 'Toggle strong',
-      content: icons.strong,
+      title: 'Toggle bold',
+      content: icons.bold,
       active: markActive(schema.marks.strong),
       run: toggleMark(schema.marks.strong),
     },
@@ -97,14 +97,14 @@ const menuConfig: MenuConfig = {
     },
     h1: {
       title: 'Change to heading level 1',
-      content: icons.heading,
+      content: icons.heading1,
       active: blockActive(schema.nodes.heading, { level: 1 }),
       enable: setBlockType(schema.nodes.heading, { level: 1 }),
       run: setBlockType(schema.nodes.heading, { level: 1 }),
     },
     h2: {
       title: 'Change to heading level 2',
-      content: 'H2',
+      content: icons.heading2,
       active: blockActive(schema.nodes.heading, { level: 2 }),
       enable: setBlockType(schema.nodes.heading, { level: 2 }),
       run: setBlockType(schema.nodes.heading, { level: 2 }),
