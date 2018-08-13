@@ -1,9 +1,11 @@
 import IconButton from 'material-ui/IconButton';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 import { EditorState, Transaction } from 'prosemirror-state';
 import React, { MouseEvent } from 'react';
 import { MenuItem } from './config/menu';
+import MuiThemeProviderProps = __MaterialUI.Styles.MuiThemeProviderProps;
 
-interface Props {
+interface Props extends MuiThemeProviderProps {
   state: EditorState;
   dispatch: (tr: Transaction) => void;
   item: MenuItem;
@@ -29,15 +31,14 @@ class MenuButton extends React.PureComponent<Props> {
   };
 
   render() {
-    const { item } = this.props;
+    const { item, muiTheme } = this.props;
     const { isActive, isDisabled } = this.state;
     return (
       <IconButton
         title={item.title}
-        tooltip={item.title}
         disabled={isDisabled}
         onClick={this.onClick}
-        iconStyle={{ color: isActive ? '#000' : '#777' }}
+        iconStyle={{ color: isActive ? muiTheme!.palette!.textColor : muiTheme!.palette!.secondaryTextColor }}
       >
         {item.content}
       </IconButton>
@@ -46,4 +47,4 @@ class MenuButton extends React.PureComponent<Props> {
 
 }
 
-export default MenuButton;
+export default muiThemeable()(MenuButton);

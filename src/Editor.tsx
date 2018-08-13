@@ -1,23 +1,15 @@
 import { defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown';
 import { EditorState, Transaction } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
+import 'prosemirror-view/style/prosemirror.css';
 import React, { ChangeEvent } from 'react';
 import plugins from './config/plugins';
 import schema from './config/schema';
+import './Editor.css';
 import MarkdownToggle from './MarkdownToggle';
 import MenuBar from './MenuBar';
 import { CombinedState } from './types';
-
-const styles = {
-  view: {
-    height: '100%',
-    width: '100%',
-  },
-  textarea: {
-    height: '100%',
-    width: '100%',
-  },
-};
+import classNames from 'classnames';
 
 interface Props {
   autoFocus?: boolean;
@@ -111,9 +103,13 @@ class Editor extends React.PureComponent<Props, State> {
         <MenuBar state={prosemirror} dispatch={this.dispatchTransaction}>
           <MarkdownToggle active={isMarkdown} onClick={this.toggleMarkdown}/>
         </MenuBar>
-        <div ref={this.createEditorView} style={{ ...styles.view, display: isMarkdown ? 'none' : 'block' }} />
-        <div style={{ ...styles.view, display: isMarkdown ? 'block' : 'none' }}>
-          <textarea style={styles.textarea} value={markdown || undefined} onChange={this.onMarkdownChange} />
+        <div ref={this.createEditorView} className={classNames({ ProseMirror: true, hidden: isMarkdown })} />
+        <div className={classNames({ ProseMirror: true, Markdown: true, hidden: !isMarkdown })}>
+          <textarea
+            className="ProseMirror Markdown"
+            value={markdown || undefined}
+            onChange={this.onMarkdownChange}
+          />
         </div>
       </div>
     );

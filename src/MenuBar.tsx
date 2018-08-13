@@ -1,4 +1,4 @@
-import Paper from 'material-ui/Paper';
+import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
 import { EditorState, Transaction } from 'prosemirror-state';
 import React from 'react';
 import menu from './config/menu';
@@ -9,30 +9,20 @@ interface Props {
   dispatch: (tr: Transaction) => void;
 }
 
-const styles = {
-  bar: {
-    display: 'flex',
-    marginBottom: 4,
-    alignItems: 'baseline',
-  },
-  group: {
-    marginRight: 16,
-  },
-};
-
 const MenuBar: React.SFC<Props> = ({ children, state, dispatch }) => (
-  <Paper style={styles.bar}>
+  <Toolbar>
+    <ToolbarGroup firstChild>
     {Object.entries(menu).map(([key, group]) => (
-      <span key={key} style={styles.group}>
+      <React.Fragment>
         {Object.entries(group).map(([key, button]) => (
           <MenuButton key={key} item={button} dispatch={dispatch} state={state} />
         ))}
-      </span>
+        <ToolbarSeparator />
+      </React.Fragment>
     ))}
-    <span style={styles.group}>
-      {children}
-    </span>
-  </Paper>
+    {children}
+    </ToolbarGroup>
+  </Toolbar>
 );
 
 export default MenuBar;
