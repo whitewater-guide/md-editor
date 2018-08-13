@@ -79,12 +79,6 @@ const menuConfig: MenuConfig = {
       active: markActive(schema.marks.em),
       run: toggleMark(schema.marks.em),
     },
-    strikethrough: {
-      title: 'Toggle strikethrough',
-      content: icons.strikethrough,
-      active: markActive(schema.marks.strikethrough),
-      run: toggleMark(schema.marks.strikethrough),
-    },
     link: {
       title: 'Add or remove link',
       content: icons.link,
