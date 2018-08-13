@@ -9,6 +9,7 @@ interface Props extends MuiThemeProviderProps {
   state: EditorState;
   dispatch: (tr: Transaction) => void;
   item: MenuItem;
+  markdownMode: boolean;
 }
 
 interface State {
@@ -31,12 +32,12 @@ class MenuButton extends React.PureComponent<Props> {
   };
 
   render() {
-    const { item, muiTheme } = this.props;
+    const { item, muiTheme, markdownMode } = this.props;
     const { isActive, isDisabled } = this.state;
     return (
       <IconButton
         title={item.title}
-        disabled={isDisabled}
+        disabled={isDisabled || markdownMode}
         onClick={this.onClick}
         iconStyle={{ color: isActive ? muiTheme!.palette!.textColor : muiTheme!.palette!.secondaryTextColor }}
       >

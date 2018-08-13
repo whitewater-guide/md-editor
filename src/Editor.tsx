@@ -100,7 +100,7 @@ class Editor extends React.PureComponent<Props, State> {
     const { prosemirror, isMarkdown, markdown } = this.getValue();
     return (
       <div style={{ width: '100%', height: '100%' }}>
-        <MenuBar state={prosemirror} dispatch={this.dispatchTransaction}>
+        <MenuBar state={prosemirror} dispatch={this.dispatchTransaction} markdownMode={isMarkdown}>
           <MarkdownToggle active={isMarkdown} onClick={this.toggleMarkdown}/>
         </MenuBar>
         <div ref={this.createEditorView} className={classNames({ ProseMirror: true, hidden: isMarkdown })} />
