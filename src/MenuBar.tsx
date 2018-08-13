@@ -1,6 +1,7 @@
 import { EditorState, Transaction } from 'prosemirror-state';
 import Paper from 'material-ui/Paper';
 import React from 'react';
+import MarkdownToggle from './MarkdownToggle';
 import MenuButton from './MenuButton';
 import menu from './config/menu';
 
@@ -16,18 +17,12 @@ const styles = {
     alignItems: 'baseline',
   },
   group: {
-    marginRight: 4,
+    marginRight: 16,
   },
 };
 
-const MenuBar: React.SFC<Props> = ({ children, state, dispatch }) => (
+const MenuBar: React.SFC<Props> = ({ state, dispatch }) => (
   <Paper style={styles.bar}>
-    {children && (
-      <span style={styles.group}>
-        {children}
-      </span>
-    )}
-
     {Object.entries(menu).map(([key, group]) => (
       <span key={key} style={styles.group}>
         {Object.entries(group).map(([key, button]) => (
@@ -35,6 +30,9 @@ const MenuBar: React.SFC<Props> = ({ children, state, dispatch }) => (
         ))}
       </span>
     ))}
+    <span style={styles.group}>
+      <MarkdownToggle />
+    </span>
   </Paper>
 );
 
