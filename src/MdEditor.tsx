@@ -1,31 +1,30 @@
+import classNames from 'classnames';
 import { defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown';
 import { EditorState, Transaction } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import 'prosemirror-view/style/prosemirror.css';
 import React, { ChangeEvent } from 'react';
-import plugins from './config/plugins';
-import schema from './config/schema';
-import './Editor.css';
+import { plugins, schema } from './config';
 import MarkdownToggle from './MarkdownToggle';
+import './MdEditor.css';
 import MenuBar from './MenuBar';
-import { CombinedState } from './types';
-import classNames from 'classnames';
+import { MdEditorValue } from './types';
 
-export interface EditorProps {
+export interface MdEditorProps {
   autoFocus?: boolean;
-  onChange?: (value: CombinedState) => void;
-  value?: CombinedState;
+  onChange?: (value: MdEditorValue) => void;
+  value?: MdEditorValue;
 }
 
 interface State {
-  value: CombinedState | null;
+  value: MdEditorValue | null;
 }
 
-export class Editor extends React.PureComponent<EditorProps, State> {
+export class MdEditor extends React.PureComponent<MdEditorProps, State> {
   private _view: EditorView | null = null;
   private _isControlled: boolean;
 
-  constructor(props: EditorProps) {
+  constructor(props: MdEditorProps) {
     super(props);
     this._isControlled = !!props.value && !!props.onChange;
     this.state = this._isControlled ?
@@ -41,7 +40,7 @@ export class Editor extends React.PureComponent<EditorProps, State> {
 
   getValue = () => this._isControlled ? this.props.value! : this.state.value!;
 
-  setValue = (value: CombinedState) => {
+  setValue = (value: MdEditorValue) => {
     if (this._isControlled) {
       this.props.onChange!(value);
     } else {
@@ -116,4 +115,4 @@ export class Editor extends React.PureComponent<EditorProps, State> {
   }
 }
 
-export default Editor;
+export default MdEditor;

@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import Editor from './Editor';
+import MdEditor from './MdEditor';
 
-storiesOf('Editor', module)
+storiesOf('MdEditor', module)
   .addDecorator(story => (
     <div style={{ height: '100vh' }}>
       {story()}
@@ -11,6 +11,6 @@ storiesOf('Editor', module)
   ))
   .add('default', () => {
     return (
-      <Editor />
+      <MdEditor />
     );
   });

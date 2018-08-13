@@ -1,7 +1,7 @@
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar';
 import { EditorState, Transaction } from 'prosemirror-state';
 import React from 'react';
-import menu from './config/menu';
+import { menu } from './config';
 import MenuButton from './MenuButton';
 
 interface Props {

@@ -6,7 +6,7 @@ import { EditorState, NodeSelection } from 'prosemirror-state';
 import * as React from 'react';
 import { Dispatch } from '../types';
 import icons from '../icons';
-import schema from './schema';
+import { schema } from './schema';
 
 const markActive = (type: MarkType) => (state: EditorState): boolean => {
   const { from, $from, to, empty } = state.selection;
@@ -65,7 +65,7 @@ export interface MenuItem {
 export type MenuGroup = { [key: string]: MenuItem };
 export type MenuConfig = { [key: string]: MenuGroup };
 
-const menuConfig: MenuConfig = {
+export const menu: MenuConfig = {
   marks: {
     strong: {
       title: 'Toggle bold',
@@ -158,5 +158,3 @@ const menuConfig: MenuConfig = {
     },
   },
 };
-
-export default menuConfig;

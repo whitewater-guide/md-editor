@@ -1,6 +1,6 @@
 {
   "name": "@whitewater-guide/md-editor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "markdown editor for whitewater.guide",
   "repository": "https://github.com/whitewater-guide/md-editor.git",
   "author": "doomsower <K.Kuznetcov@gmail.com>",
@@ -13,6 +13,7 @@
     "clean": "rm -rf ./dist/*",
     "build": "yarn run clean && rollup -c",
     "storybook": "STORYBOOK_ENABLED=true start-storybook -p 6006 -c .storybook",
+    "prepare": "yarn build",
     "prepack": "rm -rf .rpt2_cache"
   },
   "dependencies": {

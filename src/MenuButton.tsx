@@ -2,8 +2,8 @@ import IconButton from 'material-ui/IconButton';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { EditorState, Transaction } from 'prosemirror-state';
 import React, { MouseEvent } from 'react';
-import { MenuItem } from './config/menu';
 import MuiThemeProviderProps = __MaterialUI.Styles.MuiThemeProviderProps;
+import { MenuItem } from './config';
 
 interface Props extends MuiThemeProviderProps {
   state: EditorState;

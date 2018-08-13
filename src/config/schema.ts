@@ -1,5 +1,5 @@
 // @ts-ignore
-import { schema } from 'prosemirror-markdown';
+import { schema as mdSchema } from 'prosemirror-markdown';
 import { Schema } from 'prosemirror-model';
 
-export default schema as Schema;
+export const schema: Schema = mdSchema;

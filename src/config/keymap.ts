@@ -11,11 +11,11 @@ import {
   wrapIn,
 } from 'prosemirror-commands';
 import { redo, undo } from 'prosemirror-history';
-import { keymap } from 'prosemirror-keymap';
+import { keymap as makeKeymap } from 'prosemirror-keymap';
 import { liftListItem, sinkListItem, splitListItem, wrapInList } from 'prosemirror-schema-list';
 import { EditorState } from 'prosemirror-state';
 import { Dispatch } from '../types';
-import schema from './schema';
+import { schema } from './schema';
 
 const insertBreak = (state: EditorState, dispatch: Dispatch) => {
   const br = schema.nodes.hard_break.create();
@@ -58,4 +58,4 @@ Object.keys(baseKeymap).forEach((key) => {
   keys[key] = !!keys[key] ? chainCommands(keys[key], baseKeymap[key]) : baseKeymap[key];
 });
 
-export default keymap(keys);
+export const keymap = makeKeymap(keys);

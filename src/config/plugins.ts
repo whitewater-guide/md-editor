@@ -1,9 +1,7 @@
 import { history } from 'prosemirror-history';
-import keymap from './keymap';
+import { keymap } from './keymap';
 
-const plugins = [
+export const plugins = [
   keymap,
   history(),
 ];
-
-export default plugins;

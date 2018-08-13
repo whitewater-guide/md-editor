@@ -7,12 +7,14 @@ export interface MdEditorValue {
   markdown: string | null;
 }
 
-export interface EditorProps {
+export interface MdEditorProps {
   autoFocus?: boolean;
   onChange?: (value: MdEditorValue) => void;
   value?: MdEditorValue;
 }
 
-export declare class Editor extends React.PureComponent<EditorProps> {}
+export declare class MdEditor extends React.PureComponent<MdEditorProps> {}
 
-export default Editor;
+export declare const fromMarkdown: (markdown?: string | null) => MdEditorValue;
+
+export declare const toMarkdown: (value: MdEditorValue, nullify?: boolean) => string | null;
