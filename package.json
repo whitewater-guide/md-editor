@@ -10,8 +10,10 @@
     "storybook": "STORYBOOK_ENABLED=true start-storybook -p 6006 -c .storybook"
   },
   "dependencies": {
+    "lodash": "^4.17.10",
     "prosemirror-commands": "latest",
-    "prosemirror-history": "latest",
+    "prosemirror-history": "^1.0.2",
+    "prosemirror-keymap": "^1.0.1",
     "prosemirror-markdown": "^1.1.1",
     "prosemirror-model": "^1.6.1",
     "prosemirror-schema-basic": "^1.0.0",
@@ -25,9 +27,11 @@
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.10",
     "@storybook/react": "4.0.0-alpha.16",
+    "@types/lodash": "^4.14.116",
     "@types/material-ui": "^0.21.5",
     "@types/prosemirror-commands": "^1.0.1",
     "@types/prosemirror-history": "^1.0.1",
+    "@types/prosemirror-keymap": "^1.0.1",
     "@types/prosemirror-markdown": "^1.0.1",
     "@types/prosemirror-schema-basic": "^1.0.1",
     "@types/prosemirror-schema-list": "^1.0.1",

@@ -3,7 +3,7 @@ import { addDecorator, configure } from '@storybook/react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 addDecorator(story => (
-  <MuiThemeProvider>
+  <MuiThemeProvider style={{ width: '100%', height: '100%' }}>
     <div style={{ width: '100%', height: '100%' }}>
       {story()}
     </div>

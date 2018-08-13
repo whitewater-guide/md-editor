@@ -31,7 +31,7 @@ const MenuBar: React.SFC<Props> = ({ children, state, dispatch }) => (
     {Object.entries(menu).map(([key, group]) => (
       <span key={key} style={styles.group}>
         {Object.entries(group).map(([key, button]) => (
-          <MenuButton item={button} dispatch={dispatch} state={state} />
+          <MenuButton key={key} item={button} dispatch={dispatch} state={state} />
         ))}
       </span>
     ))}

@@ -5,7 +5,7 @@ import Italic from 'material-ui/svg-icons/editor/format-italic';
 import BulletedList from 'material-ui/svg-icons/editor/format-list-bulleted';
 import OrderedList from 'material-ui/svg-icons/editor/format-list-numbered';
 import Quote from 'material-ui/svg-icons/editor/format-quote';
-import Underlined from 'material-ui/svg-icons/editor/format-underlined';
+import Strikethrough from 'material-ui/svg-icons/editor/format-strikethrough';
 import Link from 'material-ui/svg-icons/editor/insert-link';
 import React from 'react';
 import Heading1Icon from './Heading1Icon';
@@ -15,7 +15,7 @@ import ParagraphIcon from './ParagraphIcon';
 export default {
   italic: <Italic />,
   bold: <Bold />,
-  underline: <Underlined />,
+  strikethrough: <Strikethrough />,
   link: <Link />,
   paragraph: <ParagraphIcon />,
   heading1: <Heading1Icon />,

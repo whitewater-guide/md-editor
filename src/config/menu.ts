@@ -5,7 +5,7 @@ import { wrapInList } from 'prosemirror-schema-list';
 import { EditorState, NodeSelection } from 'prosemirror-state';
 import * as React from 'react';
 import { Dispatch } from '../types';
-import icons from './icons';
+import icons from '../icons';
 import schema from './schema';
 
 const markActive = (type: MarkType) => (state: EditorState): boolean => {
@@ -39,8 +39,26 @@ const promptForURL = () => {
 export interface MenuItem {
   title: string;
   content: React.ReactNode;
+  /**
+   * A predicate function to determine whether the item is 'active' (for
+   * example, the item for toggling the strong mark might be active then
+   * the cursor is in strong text).
+   * @param state
+   */
   active?: (state: EditorState) => boolean;
-  enable?: (state: EditorState, dispatch: Dispatch) => boolean;
+  /**
+   * Function that is used to determine if the item is enabled. If
+   * given and returning false, the item will be given a disabled
+   * styling.
+   * @param state
+   * @param dispatch
+   */
+  enable?: (state: EditorState, dispatch?: Dispatch) => boolean;
+  /**
+   * The function to execute when the menu item is activated.
+   * @param state
+   * @param dispatch
+   */
   run: (state: EditorState, dispatch: Dispatch) => boolean;
 }
 
@@ -61,11 +79,11 @@ const menuConfig: MenuConfig = {
       active: markActive(schema.marks.em),
       run: toggleMark(schema.marks.em),
     },
-    underline: {
-      title: 'Toggle underline',
-      content: icons.underline,
-      active: markActive(schema.marks.underline),
-      run: toggleMark(schema.marks.underline),
+    strikethrough: {
+      title: 'Toggle strikethrough',
+      content: icons.strikethrough,
+      active: markActive(schema.marks.strikethrough),
+      run: toggleMark(schema.marks.strikethrough),
     },
     link: {
       title: 'Add or remove link',

@@ -1,7 +1,7 @@
+import IconButton from 'material-ui/IconButton';
 import { EditorState, Transaction } from 'prosemirror-state';
 import React, { MouseEvent } from 'react';
 import { MenuItem } from './config/menu';
-import IconButton from 'material-ui/IconButton';
 
 interface Props {
   state: EditorState;
@@ -9,7 +9,19 @@ interface Props {
   item: MenuItem;
 }
 
+interface State {
+  isActive: boolean;
+  isDisabled: boolean;
+}
+
 class MenuButton extends React.PureComponent<Props> {
+  static getDerivedStateFromProps = ({ item, state }: Props): State => ({
+    isActive: !!item.active && item.active(state),
+    isDisabled: !!item.enable && !item.enable(state),
+  });
+
+  readonly state: State = MenuButton.getDerivedStateFromProps(this.props);
+
   onClick = (e: MouseEvent) => {
     const { state, dispatch, item } = this.props;
     e.preventDefault();
@@ -17,13 +29,15 @@ class MenuButton extends React.PureComponent<Props> {
   };
 
   render() {
-    const { state, dispatch, item } = this.props;
+    const { item } = this.props;
+    const { isActive, isDisabled } = this.state;
     return (
       <IconButton
         title={item.title}
         tooltip={item.title}
-        disabled={item.enable && !item.enable(state, dispatch)}
+        disabled={isDisabled}
         onClick={this.onClick}
+        iconStyle={{ color: isActive ? '#000' : '#777' }}
       >
         {item.content}
       </IconButton>

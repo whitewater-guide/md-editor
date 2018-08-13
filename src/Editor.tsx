@@ -1,9 +1,16 @@
+import Paper from 'material-ui/Paper';
 import { Fragment } from 'prosemirror-model';
 import { EditorState, Transaction } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import React from 'react';
+import plugins from './config/plugins';
 import schema from './config/schema';
 import MenuBar from './MenuBar';
+
+const styles = {
+  view: {
+  },
+};
 
 interface Props {
   autoFocus?: boolean;
@@ -20,7 +27,7 @@ class Editor extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      state: EditorState.create({ schema }),
+      state: EditorState.create({ schema, plugins }),
     };
   }
 
@@ -51,9 +58,11 @@ class Editor extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <div>
+      <div style={{ width: '100%', height: '100%' }}>
         <MenuBar state={this.state.state} dispatch={this.dispatchTransaction} />
-        <div ref={this.createEditorView} />
+        <Paper>
+          <div ref={this.createEditorView} style={styles.view} />
+        </Paper>
       </div>
     );
   }
