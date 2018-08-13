@@ -11,7 +11,7 @@ import MenuBar from './MenuBar';
 import { CombinedState } from './types';
 import classNames from 'classnames';
 
-interface Props {
+export interface EditorProps {
   autoFocus?: boolean;
   onChange?: (value: CombinedState) => void;
   value?: CombinedState;
@@ -21,11 +21,11 @@ interface State {
   value: CombinedState | null;
 }
 
-class Editor extends React.PureComponent<Props, State> {
+export class Editor extends React.PureComponent<EditorProps, State> {
   private _view: EditorView | null = null;
   private _isControlled: boolean;
 
-  constructor(props: Props) {
+  constructor(props: EditorProps) {
     super(props);
     this._isControlled = !!props.value && !!props.onChange;
     this.state = this._isControlled ?

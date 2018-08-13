@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
+    "declaration": false,
+
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
@@ -11,8 +13,8 @@
     "noEmitOnError": true,
     "jsx": "react",
     "lib": ["esnext", "dom"],
-    "target": "es2015",
-    "module": "es2015",
+    "target": "es5",
+    "module": "es6",
     "moduleResolution": "node",
 
     "skipLibCheck": false,
@@ -21,5 +23,7 @@
     "strictFunctionTypes": false,
 
     "pretty": true
-  }
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
 }
