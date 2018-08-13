@@ -5,7 +5,7 @@ import Editor from './Editor';
 
 storiesOf('Editor', module)
   .addDecorator(story => (
-    <div style={{ display: 'block' }}>
+    <div style={{ height: '100vh' }}>
       {story()}
     </div>
   ))

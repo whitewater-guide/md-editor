@@ -3,15 +3,15 @@ import React from 'react';
 import MarkdownIcon from './icons/MarkdownIcon';
 
 interface Props {
-  enabled?: boolean;
+  active?: boolean;
   onClick?: () => void;
 }
 
-const MarkdownToggle: React.SFC<Props> = ({ enabled, onClick }) => (
+const MarkdownToggle: React.SFC<Props> = ({ active, onClick }) => (
   <IconButton
     title="Markdown"
     tooltip="Markdown"
-    disabled={!enabled}
+    iconStyle={{ color: active ? '#000' : '#777' }}
     onClick={onClick}
   >
     <MarkdownIcon />

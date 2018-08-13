@@ -1,9 +1,8 @@
-import { EditorState, Transaction } from 'prosemirror-state';
 import Paper from 'material-ui/Paper';
+import { EditorState, Transaction } from 'prosemirror-state';
 import React from 'react';
-import MarkdownToggle from './MarkdownToggle';
-import MenuButton from './MenuButton';
 import menu from './config/menu';
+import MenuButton from './MenuButton';
 
 interface Props {
   state: EditorState;
@@ -21,7 +20,7 @@ const styles = {
   },
 };
 
-const MenuBar: React.SFC<Props> = ({ state, dispatch }) => (
+const MenuBar: React.SFC<Props> = ({ children, state, dispatch }) => (
   <Paper style={styles.bar}>
     {Object.entries(menu).map(([key, group]) => (
       <span key={key} style={styles.group}>
@@ -31,7 +30,7 @@ const MenuBar: React.SFC<Props> = ({ state, dispatch }) => (
       </span>
     ))}
     <span style={styles.group}>
-      <MarkdownToggle />
+      {children}
     </span>
   </Paper>
 );
