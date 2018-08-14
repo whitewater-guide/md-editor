@@ -3,17 +3,20 @@ import { defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-ma
 import { EditorState, Transaction } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import 'prosemirror-view/style/prosemirror.css';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, CSSProperties } from 'react';
 import { plugins, schema } from './config';
 import MarkdownToggle from './MarkdownToggle';
-import './MdEditor.css';
+import classes from './MdEditor.module.css';
 import MenuBar from './MenuBar';
 import { MdEditorValue } from './types';
+import ToolbarProps = __MaterialUI.Toolbar.ToolbarProps;
 
 export interface MdEditorProps {
   autoFocus?: boolean;
   onChange?: (value: MdEditorValue) => void;
   value?: MdEditorValue;
+  containerStyle?: CSSProperties;
+  toolbarProps?: ToolbarProps;
 }
 
 interface State {
@@ -96,16 +99,29 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
   };
 
   render() {
+    const { containerStyle, toolbarProps } = this.props;
     const { prosemirror, isMarkdown, markdown } = this.getValue();
+    const pmClass = classNames({ [classes.ProseMirror]: true, [classes.hidden]: isMarkdown });
+    const textareaClass = classNames({ [classes.ProseMirror]: true, [classes.Markdown]: true });
+    const mdClass = classNames({
+      [classes.ProseMirror]: true,
+      [classes.Markdown]: true,
+      [classes.hidden]: !isMarkdown,
+    });
     return (
-      <div style={{ width: '100%', height: '100%' }}>
-        <MenuBar state={prosemirror} dispatch={this.dispatchTransaction} markdownMode={isMarkdown}>
+      <div style={{ width: '100%', height: '100%', ...containerStyle }}>
+        <MenuBar
+          state={prosemirror}
+          dispatch={this.dispatchTransaction}
+          markdownMode={isMarkdown}
+          toolbarProps={toolbarProps}
+        >
           <MarkdownToggle active={isMarkdown} onClick={this.toggleMarkdown}/>
         </MenuBar>
-        <div ref={this.createEditorView} className={classNames({ ProseMirror: true, hidden: isMarkdown })} />
-        <div className={classNames({ ProseMirror: true, Markdown: true, hidden: !isMarkdown })}>
+        <div ref={this.createEditorView} className={pmClass} />
+        <div className={mdClass}>
           <textarea
-            className="ProseMirror Markdown"
+            className={textareaClass}
             value={markdown || undefined}
             onChange={this.onMarkdownChange}
           />

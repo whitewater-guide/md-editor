@@ -19,6 +19,8 @@ yarn add prosemirror-commands \
          prosemirror-schema-list \
          prosemirror-state \
          prosemirror-view
+         
+yarn add -D @types/prosemirror-state 
 ```
 
 ```sh

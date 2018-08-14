@@ -1,6 +1,8 @@
 import typescript from 'rollup-plugin-typescript2';
-import embedCSS from 'rollup-plugin-embed-css';
+import postCSS from 'rollup-plugin-postcss';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import nodeResolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 
 import pkg from './package.json'
 
@@ -21,8 +23,16 @@ export default {
   ],
 
   plugins: [
+    nodeResolve({
+      jsnext: true,
+      main: true,
+      browser: true
+    }),
+    commonjs({
+      include: './node_modules/**'
+    }),
     peerDepsExternal(),
-    embedCSS(),
+    postCSS(),
     typescript({
       typescript: require('typescript'),
     }),

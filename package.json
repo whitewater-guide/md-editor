@@ -1,6 +1,6 @@
 {
   "name": "@whitewater-guide/md-editor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "markdown editor for whitewater.guide",
   "repository": "https://github.com/whitewater-guide/md-editor.git",
   "author": "doomsower <K.Kuznetcov@gmail.com>",
@@ -8,24 +8,25 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "types/index.d.ts",
-  "files": ["dist", "types"],
+  "files": [
+    "dist",
+    "types"
+  ],
   "scripts": {
     "clean": "rm -rf ./dist/*",
-    "build": "yarn run clean && rollup -c",
+    "build": "yarn run clean && tcm src && rollup -c",
     "storybook": "STORYBOOK_ENABLED=true start-storybook -p 6006 -c .storybook",
-    "prepare": "yarn build",
+    "prepublishOnly": "yarn build",
     "prepack": "rm -rf .rpt2_cache"
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "lodash": "^4.17.10",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.10",
     "@storybook/react": "4.0.0-alpha.16",
     "@types/classnames": "^2.2.6",
-    "@types/lodash": "^4.14.116",
     "@types/material-ui": "^0.21.5",
     "@types/prosemirror-commands": "^1.0.1",
     "@types/prosemirror-history": "^1.0.1",
@@ -50,12 +51,15 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "rollup": "^0.64.1",
-    "rollup-plugin-embed-css": "^0.1.21",
+    "rollup-plugin-commonjs": "^9.1.5",
+    "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-typescript2": "^0.16.1",
     "tslint": "^5.11.0",
     "tslint-eslint-rules": "^5.3.1",
     "tslint-react": "^3.6.0",
+    "typed-css-modules": "^0.3.5",
     "typescript": "^3.0.1"
   },
   "peerDependencies": {
