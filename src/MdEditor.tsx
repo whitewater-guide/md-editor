@@ -56,6 +56,9 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
       this._view = new EditorView(node, {
         state: this.getValue().prosemirror,
         dispatchTransaction: this.dispatchTransaction,
+        attributes: {
+          class: classNames([classes.ProseMirrorView]),
+        },
       });
 
       if (this.props.autoFocus) {
@@ -101,15 +104,10 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
   render() {
     const { containerStyle, toolbarProps } = this.props;
     const { prosemirror, isMarkdown, markdown } = this.getValue();
-    const pmClass = classNames({ [classes.ProseMirror]: true, [classes.hidden]: isMarkdown });
-    const textareaClass = classNames({ [classes.ProseMirror]: true, [classes.Markdown]: true });
-    const mdClass = classNames({
-      [classes.ProseMirror]: true,
-      [classes.Markdown]: true,
-      [classes.hidden]: !isMarkdown,
-    });
+    const pmClass = classNames({ [classes.ProseMirrorContainer]: true, [classes.hidden]: isMarkdown });
+    const mdClass = classNames({ [classes.MarkdownContainer]: true, [classes.hidden]: !isMarkdown });
     return (
-      <div style={{ width: '100%', height: '100%', ...containerStyle }}>
+      <div className={classNames([classes.container])} style={containerStyle}>
         <MenuBar
           state={prosemirror}
           dispatch={this.dispatchTransaction}
@@ -121,7 +119,7 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
         <div ref={this.createEditorView} className={pmClass} />
         <div className={mdClass}>
           <textarea
-            className={textareaClass}
+            className={classNames([classes.MarkdownTextarea])}
             value={markdown || undefined}
             onChange={this.onMarkdownChange}
           />

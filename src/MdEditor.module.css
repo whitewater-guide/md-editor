@@ -1,15 +1,46 @@
-.ProseMirror {
-  font-family: Roboto, sans-serif;
-  font-size: 16px;
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ProseMirrorContainer {
   padding: 8px;
   outline: none;
   border: none;
-  height: 100%;
-  width: 100%;
+  flex: 1;
+  overflow: hidden;
 }
 
-.Markdown {
-  margin-top: 16px;
+.ProseMirrorView {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  outline: none;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+}
+
+.MarkdownContainer {
+  flex: 1;
+  overflow: hidden;
+  padding: 16px 8px 8px;
+}
+
+.MarkdownTextarea {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  outline: none;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  border: none;
+
+  margin-bottom: 8px;
 }
 
 .hidden {
