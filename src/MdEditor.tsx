@@ -8,7 +8,7 @@ import { plugins, schema } from './config';
 import MarkdownToggle from './MarkdownToggle';
 import classes from './MdEditor.module.css';
 import MenuBar from './MenuBar';
-import { MdEditorValue } from './types';
+import { MdEditorValue, ToolbarButtonProps } from './types';
 import ToolbarProps = __MaterialUI.Toolbar.ToolbarProps;
 
 export interface MdEditorProps {
@@ -17,6 +17,7 @@ export interface MdEditorProps {
   value?: MdEditorValue;
   containerStyle?: CSSProperties;
   toolbarProps?: ToolbarProps;
+  toolbarButtonProps?: ToolbarButtonProps;
 }
 
 interface State {
@@ -102,7 +103,7 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
   };
 
   render() {
-    const { containerStyle, toolbarProps } = this.props;
+    const { containerStyle, toolbarProps, toolbarButtonProps } = this.props;
     const { prosemirror, isMarkdown, markdown } = this.getValue();
     const pmClass = classNames({ [classes.ProseMirrorContainer]: true, [classes.hidden]: isMarkdown });
     const mdClass = classNames({ [classes.MarkdownContainer]: true, [classes.hidden]: !isMarkdown });
@@ -113,8 +114,9 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
           dispatch={this.dispatchTransaction}
           markdownMode={isMarkdown}
           toolbarProps={toolbarProps}
+          toolbarButtonProps={toolbarButtonProps}
         >
-          <MarkdownToggle active={isMarkdown} onClick={this.toggleMarkdown}/>
+          <MarkdownToggle {...toolbarButtonProps} active={isMarkdown} onClick={this.toggleMarkdown}/>
         </MenuBar>
         <div ref={this.createEditorView} className={pmClass} />
         <div className={mdClass}>

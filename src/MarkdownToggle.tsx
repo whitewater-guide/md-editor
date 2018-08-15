@@ -7,16 +7,23 @@ import MuiThemeProviderProps = __MaterialUI.Styles.MuiThemeProviderProps;
 interface Props extends MuiThemeProviderProps {
   active?: boolean;
   onClick?: () => void;
+  activeIconColor?: string;
+  inactiveIconColor?: string;
 }
 
-const MarkdownToggle: React.SFC<Props> = ({ active, onClick, muiTheme }) => (
-  <IconButton
-    title="Markdown"
-    iconStyle={{ color: active ? muiTheme!.palette!.textColor : muiTheme!.palette!.secondaryTextColor }}
-    onClick={onClick}
-  >
-    {icons.markdown}
-  </IconButton>
-);
+const MarkdownToggle: React.SFC<Props> = ({ active, onClick, muiTheme, activeIconColor, inactiveIconColor }) => {
+  let color = active ?
+    (activeIconColor || muiTheme!.palette!.textColor) :
+    (inactiveIconColor || muiTheme!.palette!.secondaryTextColor);
+  return (
+    <IconButton
+      title="Markdown"
+      iconStyle={{ color: color }}
+      onClick={onClick}
+    >
+      {icons.markdown}
+    </IconButton>
+  );
+};
 
 export default muiThemeable()(MarkdownToggle);

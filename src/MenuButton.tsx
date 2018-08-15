@@ -10,18 +10,27 @@ interface Props extends MuiThemeProviderProps {
   dispatch: (tr: Transaction) => void;
   item: MenuItem;
   markdownMode: boolean;
+  activeIconColor?: string;
+  inactiveIconColor?: string;
 }
 
 interface State {
-  isActive: boolean;
   isDisabled: boolean;
+  iconStyle: React.CSSProperties;
 }
 
 class MenuButton extends React.PureComponent<Props> {
-  static getDerivedStateFromProps = ({ item, state }: Props): State => ({
-    isActive: !!item.active && item.active(state),
-    isDisabled: !!item.enable && !item.enable(state),
-  });
+  static getDerivedStateFromProps = (props: Props): State => {
+    const { item, state, muiTheme, activeIconColor, inactiveIconColor } = props;
+    const activeColor = activeIconColor || muiTheme!.palette!.textColor;
+    const inactiveColor = inactiveIconColor || muiTheme!.palette!.secondaryTextColor;
+    const isActive = !!item.active && item.active(state);
+    const iconStyle = { color: isActive ? activeColor : inactiveColor };
+    return {
+      isDisabled: !!item.enable && !item.enable(state),
+      iconStyle,
+    };
+  };
 
   readonly state: State = MenuButton.getDerivedStateFromProps(this.props);
 
@@ -32,14 +41,14 @@ class MenuButton extends React.PureComponent<Props> {
   };
 
   render() {
-    const { item, muiTheme, markdownMode } = this.props;
-    const { isActive, isDisabled } = this.state;
+    const { item, markdownMode } = this.props;
+    const { isDisabled, iconStyle } = this.state;
     return (
       <IconButton
         title={item.title}
         disabled={isDisabled || markdownMode}
         onClick={this.onClick}
-        iconStyle={{ color: isActive ? muiTheme!.palette!.textColor : muiTheme!.palette!.secondaryTextColor }}
+        iconStyle={iconStyle}
       >
         {item.content}
       </IconButton>
