@@ -42,6 +42,12 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
       };
   }
 
+  componentDidUpdate() {
+    if (this._view) {
+      this._view.updateState(this.getValue().prosemirror);
+    }
+  }
+
   getValue = () => this._isControlled ? this.props.value! : this.state.value!;
 
   setValue = (value: MdEditorValue) => {
@@ -69,12 +75,9 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
   };
 
   dispatchTransaction = (transaction: Transaction<any>) => {
-    if (!this._view) {
-      return;
-    }
-    const prosemirror = this._view.state.apply(transaction);
-    this._view.updateState(prosemirror);
-    const newValue = { prosemirror, isMarkdown: false, markdown: null };
+    const { prosemirror } = this.getValue();
+    const newProsemirror = prosemirror.apply(transaction);
+    const newValue = { prosemirror: newProsemirror, isMarkdown: false, markdown: null };
     this.setValue(newValue);
   };
 
@@ -87,9 +90,6 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
         EditorState.create({ schema, plugins, doc: defaultMarkdownParser.parse(markdown!) }) :
         prosemirror,
     };
-    if (this._view) {
-      this._view.updateState(newValue.prosemirror);
-    }
     this.setValue(newValue);
   };
 
