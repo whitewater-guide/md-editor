@@ -15,6 +15,7 @@
   "scripts": {
     "clean": "rm -rf ./dist/*",
     "build": "yarn run clean && tcm src && rollup -c",
+    "prestorybook": "yarn run tcm src",
     "storybook": "STORYBOOK_ENABLED=true start-storybook -p 6006 -c .storybook",
     "prepublishOnly": "yarn build",
     "prepack": "rm -rf .rpt2_cache"

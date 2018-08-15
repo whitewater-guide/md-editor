@@ -10,6 +10,8 @@ Features:
 
 ## Install
 
+Peer dependencies:
+
 ```bash
 yarn add prosemirror-commands \
          prosemirror-history \
@@ -19,7 +21,14 @@ yarn add prosemirror-commands \
          prosemirror-schema-list \
          prosemirror-state \
          prosemirror-view
+
+yarn add material-ui@0.20.2
          
+```
+
+Dev peer dependencies:
+
+```bash
 yarn add -D @types/prosemirror-state 
 ```
 
