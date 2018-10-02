@@ -2,6 +2,8 @@
 
 Markdown editor for whitewater.guide. Based on [ProseMirror](http://prosemirror.net)
 
+![WYSIWYG mode](images/md-editor1.jpg) ![Raw markdown mode](images/md-editor2.jpg)
+
 Features:
 - WYSIWYG mode
 - Raw markdown mode
