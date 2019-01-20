@@ -30,7 +30,7 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
 
   constructor(props: MdEditorProps) {
     super(props);
-    this._isControlled = !!props.value && !!props.onChange;
+    this._isControlled = props.value !== undefined && !!props.onChange;
     this.state = this._isControlled ?
       { value: null } :
       {
