@@ -118,9 +118,10 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
         >
           <MarkdownToggle {...toolbarButtonProps} active={isMarkdown} onClick={this.toggleMarkdown}/>
         </MenuBar>
-        <div ref={this.createEditorView} className={pmClass} />
+        <div ref={this.createEditorView} className={pmClass} spellCheck />
         <div className={mdClass}>
           <textarea
+            spellCheck
             className={classNames([classes.MarkdownTextarea])}
             value={markdown || undefined}
             onChange={this.onMarkdownChange}
