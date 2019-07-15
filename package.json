@@ -1,6 +1,6 @@
 {
   "name": "@whitewater-guide/md-editor",
-  "version": "0.1.8",
+  "version": "0.0.0-development",
   "description": "markdown editor for whitewater.guide",
   "repository": "https://github.com/whitewater-guide/md-editor.git",
   "author": "doomsower <K.Kuznetcov@gmail.com>",
@@ -18,15 +18,18 @@
     "prestorybook": "yarn run tcm src",
     "storybook": "STORYBOOK_ENABLED=true start-storybook -p 6006 -c .storybook",
     "prepublishOnly": "yarn build",
-    "prepack": "rm -rf .rpt2_cache"
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "clsx": "^1.0.4",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^8.0.0",
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/git": "^7.0.16",
     "@storybook/addon-actions": "^5.1.9",
     "@storybook/react": "5.1.9",
     "@types/prosemirror-commands": "^1.0.1",
@@ -41,6 +44,7 @@
     "@types/storybook__react": "^4.0.2",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
+    "commitlint": "^8.0.0",
     "husky": "^3.0.0",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
@@ -60,6 +64,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-typescript2": "^0.22.0",
+    "semantic-release": "^15.13.18",
     "tslint": "^5.18.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^4.0.0",

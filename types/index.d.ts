@@ -1,6 +1,6 @@
 import { ToolbarProps } from '@material-ui/core/Toolbar';
 import { EditorState } from 'prosemirror-state';
-import React, { CSSProperties } from 'react';
+import React from 'react';
 
 export interface MdEditorValue {
   isMarkdown: boolean;
@@ -12,7 +12,7 @@ export interface MdEditorProps {
   autoFocus?: boolean;
   onChange?: (value: MdEditorValue) => void;
   value?: MdEditorValue;
-  containerStyle?: CSSProperties;
+  className?: string;
   toolbarProps?: ToolbarProps;
 }
 

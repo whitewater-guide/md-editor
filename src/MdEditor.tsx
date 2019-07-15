@@ -18,7 +18,7 @@ export interface MdEditorProps {
   autoFocus?: boolean;
   onChange?: (value: MdEditorValue) => void;
   value?: MdEditorValue;
-  containerStyle?: CSSProperties;
+  className?: string;
   toolbarProps?: ToolbarProps;
 }
 
@@ -115,7 +115,7 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
   };
 
   render() {
-    const { containerStyle, toolbarProps } = this.props;
+    const { className, toolbarProps } = this.props;
     const { prosemirror, isMarkdown, markdown } = this.getValue();
     const pmClass = clsx({
       [classes.ProseMirrorContainer]: true,
@@ -126,7 +126,7 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
       [classes.hidden]: !isMarkdown,
     });
     return (
-      <div className={classes.container} style={containerStyle}>
+      <div className={clsx(classes.container, className)}>
         <MenuBar
           state={prosemirror}
           dispatch={this.dispatchTransaction}
