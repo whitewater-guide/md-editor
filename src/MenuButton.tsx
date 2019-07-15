@@ -1,60 +1,49 @@
-import IconButton from 'material-ui/IconButton';
-import muiThemeable from 'material-ui/styles/muiThemeable';
+import IconButton from '@material-ui/core/IconButton';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { EditorState, Transaction } from 'prosemirror-state';
-import React, { MouseEvent } from 'react';
-import MuiThemeProviderProps = __MaterialUI.Styles.MuiThemeProviderProps;
+import React, { MouseEvent, useCallback } from 'react';
 import { MenuItem } from './config';
 
-interface Props extends MuiThemeProviderProps {
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    inactive: {
+      color: theme.palette.text.secondary,
+    },
+    active: {
+      color: theme.palette.text.primary,
+    },
+  }),
+);
+
+interface Props {
   state: EditorState;
   dispatch: (tr: Transaction) => void;
   item: MenuItem;
   markdownMode: boolean;
-  activeIconColor?: string;
-  inactiveIconColor?: string;
 }
 
-interface State {
-  isDisabled: boolean;
-  iconStyle: React.CSSProperties;
-}
+const MenuButton: React.FC<Props> = (props) => {
+  const { state, dispatch, item, markdownMode } = props;
+  const isActive = !!item.active && item.active(state);
+  const isDisabled = !!item.enable && !item.enable(state);
+  const classes = useStyles();
+  const onClick = useCallback(
+    (e: MouseEvent) => {
+      e.preventDefault();
+      item.run(state, dispatch);
+    },
+    [item, state, dispatch],
+  );
+  return (
+    <IconButton
+      aria-label={item.title}
+      disabled={isDisabled || markdownMode}
+      onClick={onClick}
+      className={isActive ? classes.active : classes.inactive}
+    >
+      {item.content}
+    </IconButton>
+  );
+};
 
-class MenuButton extends React.PureComponent<Props> {
-  static getDerivedStateFromProps = (props: Props): State => {
-    const { item, state, muiTheme, activeIconColor, inactiveIconColor } = props;
-    const activeColor = activeIconColor || muiTheme!.palette!.textColor;
-    const inactiveColor = inactiveIconColor || muiTheme!.palette!.secondaryTextColor;
-    const isActive = !!item.active && item.active(state);
-    const iconStyle = { color: isActive ? activeColor : inactiveColor };
-    return {
-      isDisabled: !!item.enable && !item.enable(state),
-      iconStyle,
-    };
-  };
-
-  readonly state: State = MenuButton.getDerivedStateFromProps(this.props);
-
-  onClick = (e: MouseEvent) => {
-    const { state, dispatch, item } = this.props;
-    e.preventDefault();
-    item.run(state, dispatch);
-  };
-
-  render() {
-    const { item, markdownMode } = this.props;
-    const { isDisabled, iconStyle } = this.state;
-    return (
-      <IconButton
-        title={item.title}
-        disabled={isDisabled || markdownMode}
-        onClick={this.onClick}
-        iconStyle={iconStyle}
-      >
-        {item.content}
-      </IconButton>
-    );
-  }
-
-}
-
-export default muiThemeable()(MenuButton);
+export default MenuButton;

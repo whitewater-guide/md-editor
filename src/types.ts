@@ -7,8 +7,3 @@ export interface MdEditorValue {
   prosemirror: EditorState;
   markdown: string | null;
 }
-
-export interface ToolbarButtonProps {
-  activeIconColor?: string;
-  inactiveIconColor?: string;
-}

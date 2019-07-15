@@ -17,25 +17,15 @@ class Controller extends React.PureComponent<{}, State> {
   };
 
   render() {
-    return (
-      <MdEditor value={this.state.value} onChange={this.onChange} />
-    );
+    return <MdEditor value={this.state.value} onChange={this.onChange} />;
   }
 }
 
 storiesOf('MdEditor', module)
-  .addDecorator(story => (
-    <div style={{ height: '100vh' }}>
-      {story()}
-    </div>
-  ))
+  .addDecorator((story) => <div style={{ height: '100%' }}>{story()}</div>)
   .add('default', () => {
-    return (
-      <MdEditor />
-    );
+    return <MdEditor />;
   })
   .add('controlled', () => {
-    return (
-      <Controller />
-    );
+    return <Controller />;
   });

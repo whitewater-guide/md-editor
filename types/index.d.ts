@@ -1,11 +1,6 @@
+import { ToolbarProps } from '@material-ui/core/Toolbar';
 import { EditorState } from 'prosemirror-state';
 import React, { CSSProperties } from 'react';
-import ToolbarProps = __MaterialUI.Toolbar.ToolbarProps;
-
-export interface ToolbarButtonProps {
-  activeIconColor?: string;
-  inactiveIconColor?: string;
-}
 
 export interface MdEditorValue {
   isMarkdown: boolean;
@@ -19,11 +14,13 @@ export interface MdEditorProps {
   value?: MdEditorValue;
   containerStyle?: CSSProperties;
   toolbarProps?: ToolbarProps;
-  toolbarButtonProps?: ToolbarButtonProps;
 }
 
 export declare class MdEditor extends React.PureComponent<MdEditorProps> {}
 
 export declare const fromMarkdown: (markdown?: string | null) => MdEditorValue;
 
-export declare const toMarkdown: (value: MdEditorValue, nullify?: boolean) => string | null;
+export declare const toMarkdown: (
+  value: MdEditorValue,
+  nullify?: boolean,
+) => string | null;

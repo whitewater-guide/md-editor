@@ -1,5 +1,9 @@
-import classNames from 'classnames';
-import { defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown';
+import { ToolbarProps } from '@material-ui/core/Toolbar';
+import clsx from 'clsx';
+import {
+  defaultMarkdownParser,
+  defaultMarkdownSerializer,
+} from 'prosemirror-markdown';
 import { EditorState, Transaction } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import 'prosemirror-view/style/prosemirror.css';
@@ -8,8 +12,7 @@ import { plugins, schema } from './config';
 import MarkdownToggle from './MarkdownToggle';
 import classes from './MdEditor.module.css';
 import MenuBar from './MenuBar';
-import { MdEditorValue, ToolbarButtonProps } from './types';
-import ToolbarProps = __MaterialUI.Toolbar.ToolbarProps;
+import { MdEditorValue } from './types';
 
 export interface MdEditorProps {
   autoFocus?: boolean;
@@ -17,7 +20,6 @@ export interface MdEditorProps {
   value?: MdEditorValue;
   containerStyle?: CSSProperties;
   toolbarProps?: ToolbarProps;
-  toolbarButtonProps?: ToolbarButtonProps;
 }
 
 interface State {
@@ -31,15 +33,15 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
   constructor(props: MdEditorProps) {
     super(props);
     this._isControlled = props.value !== undefined && !!props.onChange;
-    this.state = this._isControlled ?
-      { value: null } :
-      {
-        value: {
-          isMarkdown: false,
-          markdown: null,
-          prosemirror: EditorState.create({ schema, plugins }),
-        },
-      };
+    this.state = this._isControlled
+      ? { value: null }
+      : {
+          value: {
+            isMarkdown: false,
+            markdown: null,
+            prosemirror: EditorState.create({ schema, plugins }),
+          },
+        };
   }
 
   componentDidUpdate() {
@@ -48,7 +50,7 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
     }
   }
 
-  getValue = () => this._isControlled ? this.props.value! : this.state.value!;
+  getValue = () => (this._isControlled ? this.props.value! : this.state.value!);
 
   setValue = (value: MdEditorValue) => {
     if (this._isControlled) {
@@ -64,7 +66,7 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
         state: this.getValue().prosemirror,
         dispatchTransaction: this.dispatchTransaction,
         attributes: {
-          class: classNames([classes.ProseMirrorView]),
+          class: classes.ProseMirrorView,
         },
       });
 
@@ -77,7 +79,11 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
   dispatchTransaction = (transaction: Transaction<any>) => {
     const { prosemirror } = this.getValue();
     const newProsemirror = prosemirror.apply(transaction);
-    const newValue = { prosemirror: newProsemirror, isMarkdown: false, markdown: null };
+    const newValue = {
+      prosemirror: newProsemirror,
+      isMarkdown: false,
+      markdown: null,
+    };
     this.setValue(newValue);
   };
 
@@ -85,10 +91,16 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
     const { isMarkdown, markdown, prosemirror } = this.getValue();
     const newValue = {
       isMarkdown: !isMarkdown,
-      markdown: isMarkdown ? null : defaultMarkdownSerializer.serialize(prosemirror.doc),
-      prosemirror: isMarkdown ?
-        EditorState.create({ schema, plugins, doc: defaultMarkdownParser.parse(markdown!) }) :
-        prosemirror,
+      markdown: isMarkdown
+        ? null
+        : defaultMarkdownSerializer.serialize(prosemirror.doc),
+      prosemirror: isMarkdown
+        ? EditorState.create({
+            schema,
+            plugins,
+            doc: defaultMarkdownParser.parse(markdown!),
+          })
+        : prosemirror,
     };
     this.setValue(newValue);
   };
@@ -103,26 +115,31 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
   };
 
   render() {
-    const { containerStyle, toolbarProps, toolbarButtonProps } = this.props;
+    const { containerStyle, toolbarProps } = this.props;
     const { prosemirror, isMarkdown, markdown } = this.getValue();
-    const pmClass = classNames({ [classes.ProseMirrorContainer]: true, [classes.hidden]: isMarkdown });
-    const mdClass = classNames({ [classes.MarkdownContainer]: true, [classes.hidden]: !isMarkdown });
+    const pmClass = clsx({
+      [classes.ProseMirrorContainer]: true,
+      [classes.hidden]: isMarkdown,
+    });
+    const mdClass = clsx({
+      [classes.MarkdownContainer]: true,
+      [classes.hidden]: !isMarkdown,
+    });
     return (
-      <div className={classNames([classes.container])} style={containerStyle}>
+      <div className={classes.container} style={containerStyle}>
         <MenuBar
           state={prosemirror}
           dispatch={this.dispatchTransaction}
           markdownMode={isMarkdown}
           toolbarProps={toolbarProps}
-          toolbarButtonProps={toolbarButtonProps}
         >
-          <MarkdownToggle {...toolbarButtonProps} active={isMarkdown} onClick={this.toggleMarkdown}/>
+          <MarkdownToggle active={isMarkdown} onClick={this.toggleMarkdown} />
         </MenuBar>
         <div ref={this.createEditorView} className={pmClass} spellCheck />
         <div className={mdClass}>
           <textarea
             spellCheck
-            className={classNames([classes.MarkdownTextarea])}
+            className={classes.MarkdownTextarea}
             value={markdown || undefined}
             onChange={this.onMarkdownChange}
           />

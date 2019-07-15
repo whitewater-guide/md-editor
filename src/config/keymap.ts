@@ -12,7 +12,12 @@ import {
 } from 'prosemirror-commands';
 import { redo, undo } from 'prosemirror-history';
 import { keymap as makeKeymap } from 'prosemirror-keymap';
-import { liftListItem, sinkListItem, splitListItem, wrapInList } from 'prosemirror-schema-list';
+import {
+  liftListItem,
+  sinkListItem,
+  splitListItem,
+  wrapInList,
+} from 'prosemirror-schema-list';
 import { EditorState } from 'prosemirror-state';
 import { Dispatch } from '../types';
 import { schema } from './schema';
@@ -36,7 +41,7 @@ const keys: { [key: string]: any } = {
   'Alt-ArrowUp': joinUp,
   'Alt-ArrowDown': joinDown,
   'Mod-BracketLeft': lift,
-  'Escape': selectParentNode,
+  Escape: selectParentNode,
   'Mod-b': toggleMark(schema.marks.strong),
   'Mod-i': toggleMark(schema.marks.em),
   'Shift-Ctrl-8': wrapInList(schema.nodes.bullet_list),
@@ -45,7 +50,7 @@ const keys: { [key: string]: any } = {
   'Mod-Enter': chainCommands(exitCode, insertBreak),
   'Shift-Enter': chainCommands(exitCode, insertBreak),
   'Ctrl-Enter': chainCommands(exitCode, insertBreak), // mac-only?
-  'Enter': splitListItem(schema.nodes.list_item),
+  Enter: splitListItem(schema.nodes.list_item),
   'Mod-[': liftListItem(schema.nodes.list_item),
   'Mod-]': sinkListItem(schema.nodes.list_item),
   'Shift-Ctrl-0': setBlockType(schema.nodes.paragraph),
@@ -55,7 +60,9 @@ const keys: { [key: string]: any } = {
 };
 
 Object.keys(baseKeymap).forEach((key) => {
-  keys[key] = !!keys[key] ? chainCommands(keys[key], baseKeymap[key]) : baseKeymap[key];
+  keys[key] = !!keys[key]
+    ? chainCommands(keys[key], baseKeymap[key])
+    : baseKeymap[key];
 });
 
 export const keymap = makeKeymap(keys);
