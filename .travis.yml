@@ -6,6 +6,10 @@ cache:
 node_js:
   - 10
 
+branches:
+  only:
+    - master
+
 before_script:
   - npm prune
 script:
