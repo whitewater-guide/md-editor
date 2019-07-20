@@ -12,9 +12,11 @@ const useStyles = makeStyles(({ spacing }) =>
   }),
 );
 
-const ToolbarSeparator: React.FC = () => {
+const ToolbarSeparator: React.FC = React.memo(() => {
   const classes = useStyles();
   return <div className={classes.separator}></div>;
-};
+});
+
+ToolbarSeparator.displayName = 'ToolbarSeparator';
 
 export default ToolbarSeparator;

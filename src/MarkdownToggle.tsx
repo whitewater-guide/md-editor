@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
   }),
 );
 
-const MarkdownToggle: React.FC<Props> = ({ active, onClick }) => {
+const MarkdownToggle: React.FC<Props> = React.memo(({ active, onClick }) => {
   const classes = useStyles();
   return (
     <IconButton
@@ -30,6 +30,8 @@ const MarkdownToggle: React.FC<Props> = ({ active, onClick }) => {
       {icons.markdown}
     </IconButton>
   );
-};
+});
+
+MarkdownToggle.displayName = 'MarkdownToggle';
 
 export default MarkdownToggle;

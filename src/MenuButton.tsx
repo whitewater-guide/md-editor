@@ -22,7 +22,7 @@ interface Props {
   markdownMode: boolean;
 }
 
-const MenuButton: React.FC<Props> = (props) => {
+const MenuButton: React.FC<Props> = React.memo((props) => {
   const { state, dispatch, item, markdownMode } = props;
   const isActive = !!item.active && item.active(state);
   const isDisabled = !!item.enable && !item.enable(state);
@@ -44,6 +44,8 @@ const MenuButton: React.FC<Props> = (props) => {
       {item.content}
     </IconButton>
   );
-};
+});
+
+MenuButton.displayName = 'MenuButton';
 
 export default MenuButton;

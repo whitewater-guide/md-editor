@@ -25,7 +25,7 @@ interface Props {
   toolbarProps?: ToolbarProps;
 }
 
-const MenuBar: React.FC<Props> = ({
+const MenuBar: React.FC<Props> = React.memo(({
   children,
   state,
   dispatch,
@@ -55,6 +55,8 @@ const MenuBar: React.FC<Props> = ({
       {children}
     </Toolbar>
   );
-};
+});
+
+MenuBar.displayName = 'MenuBar';
 
 export default MenuBar;
