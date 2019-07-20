@@ -14,6 +14,9 @@ export interface MdEditorProps {
   value?: MdEditorValue;
   className?: string;
   toolbarProps?: ToolbarProps;
+  // Formik compatibility
+  name?: string;
+  onChangeCompat?: (e: React.ChangeEvent<{name?: string, value: MdEditorValue}>) => void;
 }
 
 export declare class MdEditor extends React.PureComponent<MdEditorProps> {}

@@ -20,6 +20,9 @@ export interface MdEditorProps {
   value?: MdEditorValue;
   className?: string;
   toolbarProps?: ToolbarProps;
+  // Formik compatibility
+  name?: string;
+  onChangeCompat?: (e: React.ChangeEvent<{name?: string, value: MdEditorValue}>) => void;
 }
 
 interface State {
@@ -32,7 +35,7 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
 
   constructor(props: MdEditorProps) {
     super(props);
-    this._isControlled = props.value !== undefined && !!props.onChange;
+    this._isControlled = props.value !== undefined && (!!props.onChange || !!props.onChangeCompat);
     this.state = this._isControlled
       ? { value: null }
       : {
@@ -54,7 +57,15 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
 
   setValue = (value: MdEditorValue) => {
     if (this._isControlled) {
-      this.props.onChange!(value);
+      const { name, onChange, onChangeCompat } = this.props;
+      if (onChange) {
+        onChange(value);
+      } else if (onChangeCompat) {
+        const event: any = {
+          target: { name, value },
+        };
+        onChangeCompat(event);
+      }
     } else {
       this.setState({ value });
     }
