@@ -1,10 +1,13 @@
 import typescript from 'rollup-plugin-typescript2';
 import postCSS from 'rollup-plugin-postcss';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import nodeResolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
 
 import pkg from './package.json';
+
+const deps = [
+  ...Object.keys(pkg.dependencies || {}),
+  ...Object.keys(pkg.devDependencies || {}),
+  ...Object.keys(pkg.peerDependencies || {}),
+];
 
 export default {
   input: 'src/index.ts',
@@ -15,27 +18,22 @@ export default {
     },
     {
       file: pkg.module,
-      format: 'es',
+      format: 'esm',
     },
   ],
-  external: [
-    ...Object.keys(pkg.devDependencies || {}),
-    ...Object.keys(pkg.dependencies || {}),
-  ],
+  external: (id) =>
+    deps.some((dep) => dep === id || id.indexOf(`${dep}/`) === 0),
 
   plugins: [
-    nodeResolve({
-      jsnext: true,
-      main: true,
-      browser: true,
-    }),
-    commonjs({
-      include: './node_modules/**',
-    }),
-    peerDepsExternal(),
+    // nodeResolve({
+    //   jsnext: true,
+    //   main: true,
+    //   browser: true,
+    // }),
+    // commonjs({
+    //   include: './node_modules/**',
+    // }),
     postCSS(),
-    typescript({
-      typescript: require('typescript'),
-    }),
+    typescript(),
   ],
 };

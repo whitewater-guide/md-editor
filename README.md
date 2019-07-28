@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/whitewater-guide/md-editor.svg?branch=master)](https://travis-ci.org/whitewater-guide/md-editor)
+
 # md-editor
 
 Markdown editor for whitewater.guide. Based on [ProseMirror](http://prosemirror.net)
