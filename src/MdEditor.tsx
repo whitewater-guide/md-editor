@@ -111,14 +111,19 @@ export const MdEditor: React.FC<MdEditorProps> = React.memo((props) => {
   );
 
   useLayoutEffect(() => {
-    const { rememberMdSwitch, value } = propsRef.current;
+    const { rememberMdSwitch, value, onChangeCompat } = propsRef.current;
     if (!rememberMdSwitch) {
       return;
     }
     const currentMd = value.isMarkdown;
     const savedMd = !!Cookies.get(MD_COOKIE);
     if (currentMd !== savedMd) {
-      onToggleMarkdown();
+      if (!!onChangeCompat) {
+        // firing this immediately will break formik
+        setTimeout(() => onToggleMarkdown(), 25);
+      } else {
+        onToggleMarkdown();
+      }
     }
   }, [propsRef, onToggleMarkdown]);
 
