@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/whitewater-guide/md-editor/compare/v1.2.0...v1.2.1) (2019-10-13)
+
+
+### Bug Fixes
+
+* rememberMdSwitch added to type declarations ([82b50ae](https://github.com/whitewater-guide/md-editor/commit/82b50aeafae8d34928f2320b0a3bdb3451e4881b))
+
 # [1.2.0](https://github.com/whitewater-guide/md-editor/compare/v1.1.2...v1.2.0) (2019-10-13)
 
 
