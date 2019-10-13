@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/whitewater-guide/md-editor/compare/v1.2.1...v2.0.0) (2019-10-13)
+
+
+### Features
+
+* rewrite using hooks ([89db38e](https://github.com/whitewater-guide/md-editor/commit/89db38e3413bf412b1489e3db586420b7e665932))
+
+
+### BREAKING CHANGES
+
+* uncontrolled mode no longer supported
+
 # [1.2.0](https://github.com/whitewater-guide/md-editor/compare/v1.1.2...v1.2.0) (2019-10-13)
 
 ### Features
