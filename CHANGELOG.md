@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/whitewater-guide/md-editor/compare/v2.0.0...v2.0.1) (2019-10-13)
+
+
+### Bug Fixes
+
+* export correctly ([e1eea65](https://github.com/whitewater-guide/md-editor/commit/e1eea6596b25499a65035b5d9065879816d1acf6))
+
 # [2.0.0](https://github.com/whitewater-guide/md-editor/compare/v1.2.1...v2.0.0) (2019-10-13)
 
 
