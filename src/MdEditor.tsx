@@ -32,7 +32,7 @@ export interface MdEditorProps {
   ) => void;
 }
 
-const MdEditor: React.FC<MdEditorProps> = React.memo((props) => {
+export const MdEditor: React.FC<MdEditorProps> = React.memo((props) => {
   const { isMarkdown, markdown, prosemirror } = props.value;
   const viewRef = useRef<EditorView | null>(null);
   const propsRef = useRef(props);
