@@ -1,5 +1,6 @@
 import { ToolbarProps } from '@material-ui/core/Toolbar';
 import clsx from 'clsx';
+import Cookies from 'js-cookie';
 import {
   defaultMarkdownParser,
   defaultMarkdownSerializer,
@@ -7,12 +8,14 @@ import {
 import { EditorState, Transaction } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import 'prosemirror-view/style/prosemirror.css';
-import React, { ChangeEvent, CSSProperties } from 'react';
+import React, { ChangeEvent } from 'react';
 import { plugins, schema } from './config';
 import MarkdownToggle from './MarkdownToggle';
 import classes from './MdEditor.module.css';
 import MenuBar from './MenuBar';
 import { MdEditorValue } from './types';
+
+const MD_COOKIE = 'md_editor_markdown';
 
 export interface MdEditorProps {
   autoFocus?: boolean;
@@ -20,9 +23,12 @@ export interface MdEditorProps {
   value?: MdEditorValue;
   className?: string;
   toolbarProps?: ToolbarProps;
+  rememberMdSwitch?: boolean;
   // Formik compatibility
   name?: string;
-  onChangeCompat?: (e: React.ChangeEvent<{name?: string, value: MdEditorValue}>) => void;
+  onChangeCompat?: (
+    e: React.ChangeEvent<{ name?: string; value: MdEditorValue }>,
+  ) => void;
 }
 
 interface State {
@@ -35,7 +41,8 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
 
   constructor(props: MdEditorProps) {
     super(props);
-    this._isControlled = props.value !== undefined && (!!props.onChange || !!props.onChangeCompat);
+    this._isControlled =
+      props.value !== undefined && (!!props.onChange || !!props.onChangeCompat);
     this.state = this._isControlled
       ? { value: null }
       : {
@@ -45,6 +52,18 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
             prosemirror: EditorState.create({ schema, plugins }),
           },
         };
+  }
+
+  componentDidMount() {
+    const { rememberMdSwitch } = this.props;
+    if (!rememberMdSwitch) {
+      return;
+    }
+    const currentMd = this.getValue().isMarkdown;
+    const savedMd = !!Cookies.get(MD_COOKIE);
+    if (currentMd !== savedMd) {
+      this.toggleMarkdown();
+    }
   }
 
   componentDidUpdate() {
@@ -114,6 +133,13 @@ export class MdEditor extends React.PureComponent<MdEditorProps, State> {
         : prosemirror,
     };
     this.setValue(newValue);
+    if (this.props.rememberMdSwitch) {
+      if (isMarkdown) {
+        Cookies.remove(MD_COOKIE);
+      } else {
+        Cookies.set(MD_COOKIE, '1');
+      }
+    }
   };
 
   onMarkdownChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
