@@ -10,7 +10,7 @@ addDecorator((story) => (
       overflow: 'hidden',
     }}
   >
-    <Paper style={{ margin: 32, minHeight: 600 }}>{story()}</Paper>
+    <Paper style={{ margin: 32, height: 600 }}>{story()}</Paper>
   </div>
 ));
 

@@ -11,7 +11,7 @@ export interface MdEditorValue {
 export interface MdEditorProps {
   autoFocus?: boolean;
   onChange?: (value: MdEditorValue) => void;
-  value?: MdEditorValue;
+  value: MdEditorValue;
   className?: string;
   toolbarProps?: ToolbarProps;
   rememberMdSwitch?: boolean;
@@ -30,3 +30,5 @@ export declare const toMarkdown: (
   value: MdEditorValue,
   nullify?: boolean,
 ) => string | null;
+
+export declare const toggleMarkdown: (value: MdEditorValue) => MdEditorValue;

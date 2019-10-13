@@ -30,10 +30,6 @@ class Controller extends React.PureComponent<
 }
 
 storiesOf('MdEditor', module)
-  .addDecorator((story) => <div style={{ height: '100%' }}>{story()}</div>)
-  .add('default', () => {
-    return <MdEditor />;
-  })
   .add('controlled', () => {
     return <Controller />;
   })

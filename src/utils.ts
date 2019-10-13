@@ -25,5 +25,22 @@ export const toMarkdown = (
     ? markdown
     : defaultMarkdownSerializer.serialize(prosemirror.doc);
   const trimmed = (text || '').trim();
-  return nullify ? text || null : text;
+  return nullify ? trimmed || null : trimmed;
+};
+
+export const toggleMarkdown = (value: MdEditorValue): MdEditorValue => {
+  const { isMarkdown, markdown, prosemirror } = value;
+  return {
+    isMarkdown: !isMarkdown,
+    markdown: isMarkdown
+      ? null
+      : defaultMarkdownSerializer.serialize(prosemirror.doc),
+    prosemirror: isMarkdown
+      ? EditorState.create({
+          schema,
+          plugins,
+          doc: defaultMarkdownParser.parse(markdown!),
+        })
+      : prosemirror,
+  };
 };
