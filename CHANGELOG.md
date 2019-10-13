@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/whitewater-guide/md-editor/compare/v2.0.1...v2.0.2) (2019-10-13)
+
+
+### Bug Fixes
+
+* fix rememberMdSwitch with formik ([b0507fc](https://github.com/whitewater-guide/md-editor/commit/b0507fcb6215452d73f51a6a5c24a54f82947612))
+
 ## [2.0.1](https://github.com/whitewater-guide/md-editor/compare/v2.0.0...v2.0.1) (2019-10-13)
 
 
